@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: 3.75in 2.25in;
+            margin: 0;
+        }
+
+        body {
+            width: 1125px;
+            height: 675px;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Variant C: Dark charcoal background */
+        .variant-c {
+            background: linear-gradient(135deg, #1a3d1b 0%, #2c5f2d 100%);
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 0 150px;
+        }
+
+        .logo-container img {
+            max-width: 750px;
+            max-height: 450px;
+            width: auto;
+            height: auto;
+            filter: brightness(0) invert(1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+    </style>
+</head>
+<body>
+    <div class="card variant-c">
+        <div class="logo-container">
+            <img src="../assets/herdshare-logo.svg" alt="HerdShare">
+        </div>
+    </div>
+</body>
+</html>

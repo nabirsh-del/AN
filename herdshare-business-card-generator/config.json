@@ -1,0 +1,16 @@
+{
+  "name": "Nikolai Birsh",
+  "title": "Founder | HerdShare",
+  "email": "nikolai@herdshare.com",
+  "phone": "+1 (555) 123-4567",
+  "website": "herdshare.com",
+  "qr_url": "https://herdshare.com",
+  "tagline": "American Beef. American Values.",
+  "colors": {
+    "primary": "#2c5f2d",
+    "secondary": "#97bc62",
+    "dark": "#1a3d1b",
+    "text": "#333333",
+    "light": "#f8f9fa"
+  }
+}

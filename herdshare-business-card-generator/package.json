@@ -1,0 +1,22 @@
+{
+  "name": "herdshare-business-card-generator",
+  "version": "1.0.0",
+  "description": "Print-ready business card generator for HerdShare",
+  "main": "generate.js",
+  "scripts": {
+    "generate": "node generate.js",
+    "install-playwright": "npx playwright install chromium"
+  },
+  "keywords": [
+    "business-card",
+    "herdshare",
+    "pdf",
+    "print"
+  ],
+  "author": "HerdShare",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "qrcode": "^1.5.3"
+  }
+}
