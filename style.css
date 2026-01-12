@@ -4,205 +4,283 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-green: #2c5f2d;
+    --light-green: #97bc62;
+    --cream: #f5f5dc;
+    --dark-text: #333;
+    --light-text: #666;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #333;
+    background: linear-gradient(135deg, var(--primary-green) 0%, #1a3d1a 100%);
+    color: var(--dark-text);
     line-height: 1.6;
     min-height: 100vh;
+    position: relative;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.02)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+    z-index: 0;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 header {
     text-align: center;
-    padding: 40px 0;
+    padding: 60px 0 40px;
 }
 
 .logo h1 {
     color: white;
-    font-size: 3em;
+    font-size: 2.8em;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+}
+
+.logo .tagline {
+    color: var(--light-green);
+    font-size: 1.4em;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
 
 main {
     background: white;
     border-radius: 20px;
-    padding: 60px 40px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
 
-.hero {
+.coming-soon {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
-.hero h2 {
-    font-size: 2.5em;
-    color: #333;
+.badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     margin-bottom: 20px;
 }
 
-.tagline {
-    font-size: 1.3em;
-    color: #666;
-    margin-bottom: 40px;
+.coming-soon h2 {
+    font-size: 2.2em;
+    color: var(--primary-green);
+    margin-bottom: 20px;
 }
 
-.stats {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 40px;
+.description {
+    font-size: 1.1em;
+    color: var(--light-text);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
 }
 
-.stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 15px;
-    min-width: 200px;
-    color: white;
-    transition: transform 0.3s ease;
-}
-
-.stat:hover {
-    transform: translateY(-5px);
-}
-
-.stat-number {
-    font-size: 2.5em;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.stat-label {
-    font-size: 1em;
-    opacity: 0.9;
-}
-
-.features {
-    margin: 60px 0;
-}
-
-.features h3 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 40px;
-    color: #333;
-}
-
-.feature-grid {
+.features-preview {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 50px;
+    padding: 30px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .feature {
     text-align: center;
-    padding: 30px;
-    background: #f8f9fa;
-    border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px 15px;
+    border-radius: 12px;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .feature:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    background: #f9f9f9;
 }
 
 .feature-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
+    font-size: 2.5em;
+    margin-bottom: 12px;
 }
 
 .feature h4 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    color: #667eea;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: var(--primary-green);
 }
 
 .feature p {
-    color: #666;
-    line-height: 1.6;
+    color: var(--light-text);
+    font-size: 0.9em;
 }
 
-.setup {
+.contact-section {
     text-align: center;
-    padding: 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 15px;
-    color: white;
-    margin-top: 60px;
 }
 
-.setup h3 {
-    font-size: 2em;
+.contact-section h3 {
+    font-size: 1.8em;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+}
+
+.contact-section > p {
+    color: var(--light-text);
+    margin-bottom: 30px;
+}
+
+.contact-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
     margin-bottom: 20px;
+    text-align: left;
 }
 
-.setup-instructions {
-    margin-top: 30px;
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--dark-text);
+    font-size: 0.95em;
 }
 
-.setup-instructions p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-}
-
-.dns-servers {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.dns-servers code {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 15px 30px;
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
     border-radius: 10px;
-    font-size: 1.2em;
-    font-family: 'Courier New', monospace;
-    backdrop-filter: blur(10px);
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--light-green);
+    box-shadow: 0 0 0 3px rgba(151, 188, 98, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary-green) 0%, #3a7a3b 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(44, 95, 45, 0.4);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
 }
 
 footer {
     text-align: center;
     padding: 40px 0;
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9em;
 }
 
 @media (max-width: 768px) {
+    header {
+        padding: 40px 0 30px;
+    }
+
     .logo h1 {
         font-size: 2em;
     }
 
-    .hero h2 {
-        font-size: 1.8em;
+    .logo .tagline {
+        font-size: 1.1em;
     }
 
     main {
-        padding: 40px 20px;
+        padding: 35px 25px;
     }
 
-    .stats {
-        flex-direction: column;
+    .coming-soon h2 {
+        font-size: 1.6em;
     }
 
-    .feature-grid {
+    .description {
+        font-size: 1em;
+    }
+
+    .features-preview {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
-    .dns-servers {
-        flex-direction: column;
+    .feature {
+        padding: 15px;
+    }
+
+    .contact-section h3 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    .logo h1 {
+        font-size: 1.7em;
+    }
+
+    main {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .badge {
+        font-size: 0.8em;
+        padding: 6px 18px;
+    }
+
+    .coming-soon h2 {
+        font-size: 1.4em;
     }
 }

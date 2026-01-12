@@ -3,79 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>loudflare DNS - Lightning Fast DNS Resolution</title>
+    <title>Herd Share Company - Coming Soon</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="background-overlay"></div>
     <div class="container">
         <header>
             <div class="logo">
-                <h1>⚡ loudflare DNS</h1>
+                <h1>Herd Share Company</h1>
+                <p class="tagline">Connecting farms and families</p>
             </div>
         </header>
 
         <main>
-            <section class="hero">
-                <h2>Lightning Fast DNS Resolution</h2>
-                <p class="tagline">Experience the speed of next-generation DNS</p>
+            <section class="coming-soon">
+                <div class="badge">Coming Soon</div>
+                <h2>Something Great is Growing</h2>
+                <p class="description">We're building a better way to connect local ranchers directly with families who care about where their food comes from. Fresh, quality beef from trusted American farms.</p>
+            </section>
 
-                <div class="stats">
-                    <div class="stat">
-                        <span class="stat-number">&lt;10ms</span>
-                        <span class="stat-label">Average Response Time</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">99.99%</span>
-                        <span class="stat-label">Uptime</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">Global</span>
-                        <span class="stat-label">Network Coverage</span>
-                    </div>
+            <section class="features-preview">
+                <div class="feature">
+                    <div class="feature-icon">🐄</div>
+                    <h4>Local Ranchers</h4>
+                    <p>Direct from trusted family farms</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🥩</div>
+                    <h4>Quality Beef</h4>
+                    <p>Premium cuts, farm fresh</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🤝</div>
+                    <h4>Community</h4>
+                    <p>Supporting local agriculture</p>
                 </div>
             </section>
 
-            <section class="features">
-                <h3>Why loudflare DNS?</h3>
-                <div class="feature-grid">
-                    <div class="feature">
-                        <div class="feature-icon">🚀</div>
-                        <h4>Blazing Fast</h4>
-                        <p>Optimized infrastructure for minimal latency and maximum throughput</p>
+            <section class="contact-section">
+                <h3>Contact Us</h3>
+                <p>Interested in learning more? Send us a message.</p>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">🔒</div>
-                        <h4>Secure</h4>
-                        <p>Built-in DDoS protection and DNS security features</p>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your email" required>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">🌐</div>
-                        <h4>Globally Distributed</h4>
-                        <p>Servers worldwide ensure low latency from anywhere</p>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your message" rows="4" required></textarea>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">📊</div>
-                        <h4>Reliable</h4>
-                        <p>Enterprise-grade reliability with redundant failover</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="setup">
-                <h3>Get Started in Seconds</h3>
-                <div class="setup-instructions">
-                    <p>Configure your DNS settings to use loudflare:</p>
-                    <div class="dns-servers">
-                        <code>Primary: 1.1.1.1</code>
-                        <code>Secondary: 1.0.0.1</code>
-                    </div>
-                </div>
+                    <button type="submit" class="btn-submit">Send</button>
+                </form>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2026 loudflare DNS. Fast DNS for everyone.</p>
+            <p>&copy; 2026 Herd Share Company. American Beef. American Values.</p>
         </footer>
     </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
