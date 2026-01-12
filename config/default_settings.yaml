@@ -1,0 +1,19 @@
+postgres_dsn: postgresql://analytics:change-me@localhost:5432/badhwar_intel
+vector_db:
+  provider: pinecone
+  api_key: YOUR_PINECONE_KEY
+  environment: us-east4-gcp
+  index: badhwar-corpus
+llm:
+  provider: openai
+  model: gpt-4.1-mini
+  temperature: 0.2
+alerting:
+  email_recipients:
+    - comms@badhwar.org
+  slack_webhook: https://hooks.slack.com/services/replace-me
+  relevance_threshold: 75
+  urgency_override: breaking
+pilot:
+  start_date: 2024-08-01
+  end_date: 2024-08-14
