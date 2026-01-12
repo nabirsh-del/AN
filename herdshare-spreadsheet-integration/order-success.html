@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - HerdShare</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2c5f2d;
+            margin-bottom: 20px;
+        }
+
+        .order-id {
+            background: #f0f7f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+
+        .success-message {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .next-steps {
+            text-align: left;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .next-steps h3 {
+            color: #2c5f2d;
+            margin-bottom: 15px;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .next-steps li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .next-steps li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2c5f2d;
+            font-weight: bold;
+        }
+
+        .btn-home {
+            display: inline-block;
+            background: #2c5f2d;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-home:hover {
+            background: #1a3d1b;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">🎉</div>
+        <h1>Order Confirmed!</h1>
+
+        <p class="success-message">
+            Thank you for your order! We've received your payment and our team is already preparing your American beef.
+        </p>
+
+        <div class="order-id" id="orderIdDisplay">
+            Your order is being processed...
+        </div>
+
+        <div class="next-steps">
+            <h3>What Happens Next?</h3>
+            <ul>
+                <li>You'll receive a confirmation email shortly</li>
+                <li>Our team will coordinate with a local rancher</li>
+                <li>We'll schedule USDA processing</li>
+                <li>You'll get tracking info before delivery</li>
+                <li>Your beef arrives fresh, frozen, and ready</li>
+            </ul>
+        </div>
+
+        <p class="success-message" style="margin-top: 20px;">
+            <strong>Questions?</strong> Contact us at <a href="mailto:orders@herdshare.com">orders@herdshare.com</a>
+        </p>
+
+        <a href="/" class="btn-home">Return to Home</a>
+    </div>
+
+    <script>
+        // Get session ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+
+        if (sessionId) {
+            document.getElementById('orderIdDisplay').innerHTML = `
+                <strong>Session ID:</strong> ${sessionId}
+            `;
+        }
+    </script>
+</body>
+</html>

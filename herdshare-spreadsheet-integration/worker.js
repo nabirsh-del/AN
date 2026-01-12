@@ -425,6 +425,47 @@ export default {
         });
       }
 
+      // Create Stripe checkout session
+      if (url.pathname === '/create-checkout' && request.method === 'POST') {
+        const stripe = new Stripe(env.STRIPE_SECRET_KEY);
+        const orderData = await request.json();
+
+        // Create Stripe checkout session
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items: [
+            {
+              price_data: {
+                currency: 'usd',
+                product_data: {
+                  name: orderData.productName,
+                  description: orderData.productDescription,
+                },
+                unit_amount: orderData.price, // Price in cents
+              },
+              quantity: 1,
+            },
+          ],
+          mode: 'payment',
+          success_url: `${request.headers.get('origin')}/order-success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${request.headers.get('origin')}/order-cancelled`,
+          customer_email: orderData.email,
+          metadata: {
+            productType: orderData.productType,
+            buyerName: orderData.buyerName,
+            organizationType: orderData.organizationType,
+            deliveryAddress: orderData.deliveryAddress,
+            deliveryWindow: orderData.deliveryWindow,
+            notes: orderData.notes
+          }
+        });
+
+        return new Response(JSON.stringify({ sessionId: session.id }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        });
+      }
+
       // Health check
       if (url.pathname === '/health') {
         return new Response(JSON.stringify({ status: 'ok' }), {
