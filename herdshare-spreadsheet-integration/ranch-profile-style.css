@@ -1,0 +1,592 @@
+/* HerdShare Ranch Profile Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+    background: #2c5f2d;
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.site-header nav {
+    display: flex;
+    gap: 30px;
+}
+
+.site-header nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.site-header nav a:hover {
+    opacity: 0.8;
+}
+
+/* Ranch Hero */
+.ranch-hero {
+    position: relative;
+    height: 500px;
+    background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+/* Add background image: */
+.ranch-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/ranch-hero-bg.jpg'); /* Add actual ranch photo */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(44,95,45,0.8) 0%, rgba(151,188,98,0.8) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.ranch-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.ranch-hero h1 {
+    font-size: 4em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.location {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    opacity: 0.95;
+}
+
+.tagline {
+    font-size: 1.5em;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Quick Stats */
+.quick-stats {
+    background: white;
+    padding: 60px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.quick-stats .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.stat-value {
+    font-size: 3em;
+    font-weight: 700;
+    color: #2c5f2d;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 1.1em;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Ranch Story */
+.ranch-story {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.story-content h2 {
+    font-size: 2.5em;
+    color: #2c5f2d;
+    margin-bottom: 10px;
+}
+
+.story-content h3 {
+    font-size: 1.8em;
+    color: #666;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.story-content p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+blockquote {
+    background: white;
+    padding: 30px;
+    border-left: 5px solid #2c5f2d;
+    margin: 30px 0;
+    font-size: 1.2em;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: 15px;
+    font-style: normal;
+    font-weight: 600;
+    color: #2c5f2d;
+}
+
+.image-placeholder {
+    background: #e0e0e0;
+    height: 500px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    color: #999;
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Ranch Details */
+.ranch-details {
+    padding: 80px 20px;
+    background: white;
+}
+
+.ranch-details h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c5f2d;
+    margin-bottom: 60px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.detail-card {
+    background: #f8f9fa;
+    padding: 35px;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(44,95,45,0.15);
+}
+
+.detail-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.detail-card h3 {
+    font-size: 1.4em;
+    color: #2c5f2d;
+    margin-bottom: 15px;
+}
+
+.detail-card p {
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Product Breakdown */
+.product-breakdown {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.product-breakdown h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c5f2d;
+    margin-bottom: 20px;
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+/* Product Tabs */
+.product-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: white;
+    border: 2px solid #2c5f2d;
+    color: #2c5f2d;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover {
+    background: #f0f7f0;
+}
+
+.tab-btn.active {
+    background: #2c5f2d;
+    color: white;
+}
+
+/* Product Content */
+.product-content {
+    display: none;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-content.active {
+    display: block;
+}
+
+.product-summary {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.product-summary h3 {
+    font-size: 2em;
+    color: #2c5f2d;
+    margin-bottom: 15px;
+}
+
+.product-summary .price {
+    font-size: 1.3em;
+    color: #666;
+}
+
+/* Cuts Grid */
+.cuts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.cut-category {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.cut-category h4 {
+    font-size: 1.3em;
+    color: #2c5f2d;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.cut-category ul {
+    list-style: none;
+}
+
+.cut-category li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #666;
+}
+
+.cut-category li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #2c5f2d;
+    font-weight: bold;
+}
+
+.cut-category strong {
+    color: #333;
+}
+
+.freezer-note {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+/* HerdShare Difference */
+.herdshare-difference {
+    padding: 80px 20px;
+    background: white;
+}
+
+.herdshare-difference h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c5f2d;
+    margin-bottom: 60px;
+}
+
+.difference-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.difference-point {
+    text-align: center;
+    padding: 30px;
+}
+
+.difference-point h3 {
+    font-size: 1.5em;
+    color: #2c5f2d;
+    margin-bottom: 15px;
+}
+
+.difference-point p {
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Order CTA */
+.order-cta {
+    background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.order-cta h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.order-cta p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    opacity: 0.95;
+}
+
+.btn-order-now {
+    display: inline-block;
+    background: white;
+    color: #2c5f2d;
+    padding: 20px 60px;
+    font-size: 1.3em;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-order-now:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.delivery-note {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Footer */
+.site-footer {
+    background: #1a3d1b;
+    color: white;
+    padding: 60px 20px 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.footer-section a:hover {
+    opacity: 1;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .ranch-hero h1 {
+        font-size: 3em;
+    }
+
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .site-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .site-header nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .ranch-hero {
+        height: 400px;
+    }
+
+    .ranch-hero h1 {
+        font-size: 2em;
+    }
+
+    .tagline {
+        font-size: 1.1em;
+    }
+
+    .product-breakdown h2,
+    .ranch-details h2,
+    .ranch-story h2,
+    .herdshare-difference h2 {
+        font-size: 1.8em;
+    }
+
+    .cuts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        width: 100%;
+    }
+}
