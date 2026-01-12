@@ -1,0 +1,26 @@
+{
+  "name": "herdshare-spreadsheet-integration",
+  "version": "1.0.0",
+  "description": "HerdShare order tracking and accounting integration",
+  "main": "worker.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "init-spreadsheet": "node initialize-spreadsheet.js"
+  },
+  "keywords": [
+    "herdshare",
+    "orders",
+    "accounting",
+    "cloudflare-workers"
+  ],
+  "author": "HerdShare",
+  "license": "MIT",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "wrangler": "^3.0.0"
+  }
+}

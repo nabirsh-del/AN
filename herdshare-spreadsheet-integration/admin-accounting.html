@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting - HerdShare Admin</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>🐄 HerdShare</h2>
+                <p id="userDisplay"></p>
+            </div>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="admin-orders.html">
+                        <span class="icon">📦</span>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="admin-accounting.html">
+                        <span class="icon">💰</span>
+                        <span>Accounting</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Accounting</h1>
+                    <p>Revenue tracking and financial reporting</p>
+                </div>
+                <button id="refreshBtn" class="btn-primary">
+                    <span class="icon">🔄</span> Refresh
+                </button>
+            </header>
+
+            <!-- Financial Summary -->
+            <div class="stats-grid">
+                <div class="stat-card highlight">
+                    <div class="stat-label">Total Revenue</div>
+                    <div class="stat-value" id="totalRevenue">$0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total COGS</div>
+                    <div class="stat-value" id="totalCOGS">$0</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">Gross Margin</div>
+                    <div class="stat-value" id="grossMargin">$0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg Margin %</div>
+                    <div class="stat-value" id="avgMarginPercent">0%</div>
+                </div>
+            </div>
+
+            <!-- Product Breakdown -->
+            <div class="section">
+                <h2>Product Breakdown</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Whole Cows</div>
+                        <div class="stat-value" id="wholeCount">0</div>
+                        <div class="stat-detail" id="wholeRevenue">$0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Half Cows</div>
+                        <div class="stat-value" id="halfCount">0</div>
+                        <div class="stat-detail" id="halfRevenue">$0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Quarter Cows</div>
+                        <div class="stat-value" id="quarterCount">0</div>
+                        <div class="stat-detail" id="quarterRevenue">$0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Revenue Chart -->
+            <div class="section">
+                <h2>Monthly Revenue</h2>
+                <div class="chart-container" id="monthlyChart">
+                    <!-- Revenue by month will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Accounting Table -->
+            <div class="section">
+                <h2>Transaction Details</h2>
+
+                <!-- Filters -->
+                <div class="filters">
+                    <select id="monthFilter" class="filter-select">
+                        <option value="all">All Months</option>
+                    </select>
+
+                    <select id="productFilter" class="filter-select">
+                        <option value="all">All Products</option>
+                        <option value="Whole">Whole</option>
+                        <option value="Half">Half</option>
+                        <option value="Quarter">Quarter</option>
+                    </select>
+
+                    <button id="exportBtn" class="btn-secondary">Export CSV</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Product</th>
+                                <th>Revenue</th>
+                                <th>COGS</th>
+                                <th>Gross Margin</th>
+                                <th>Margin %</th>
+                                <th>Stripe Fee</th>
+                                <th>Net Profit</th>
+                                <th>Net Margin %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accountingTableBody">
+                            <tr>
+                                <td colspan="10" class="loading">Loading accounting data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Rancher Payments Section -->
+            <div class="section">
+                <h2>Rancher Payments</h2>
+                <div class="stats-grid">
+                    <div class="stat-card warning">
+                        <div class="stat-label">Pending Payments</div>
+                        <div class="stat-value" id="pendingPayments">0</div>
+                        <div class="stat-detail" id="pendingAmount">$0</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-label">Paid Out</div>
+                        <div class="stat-value" id="paidPayments">0</div>
+                        <div class="stat-detail" id="paidAmount">$0</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // API endpoint
+        const API_URL = 'https://your-worker.workers.dev';
+
+        let allAccounting = [];
+        let currentUser = null;
+
+        // Authentication check
+        function checkAuth() {
+            const auth = sessionStorage.getItem('herdshare_auth');
+            if (!auth) {
+                window.location.href = 'admin-login.html';
+                return null;
+            }
+
+            const authData = JSON.parse(auth);
+            if (Date.now() - authData.timestamp > 8 * 60 * 60 * 1000) {
+                sessionStorage.removeItem('herdshare_auth');
+                window.location.href = 'admin-login.html';
+                return null;
+            }
+
+            return authData;
+        }
+
+        // Load accounting data
+        async function loadAccounting() {
+            try {
+                const response = await fetch(`${API_URL}/api/accounting`);
+                const data = await response.json();
+
+                allAccounting = data.accounting.map(row => ({
+                    orderId: row[0],
+                    orderDate: row[1],
+                    month: row[2],
+                    productType: row[3],
+                    revenue: parseFloat(row[4]),
+                    rancherCost: parseFloat(row[5]),
+                    processingCost: parseFloat(row[6]),
+                    shippingCost: parseFloat(row[7]),
+                    totalCOGS: parseFloat(row[8]),
+                    grossMargin: parseFloat(row[9]),
+                    marginPercent: parseFloat(row[10]),
+                    paymentStatus: row[11],
+                    rancherPaid: row[12],
+                    rancherPaymentDate: row[13],
+                    stripeFee: parseFloat(row[14]),
+                    netProfit: parseFloat(row[15]),
+                    netMarginPercent: parseFloat(row[16])
+                }));
+
+                updateFinancialSummary();
+                updateProductBreakdown();
+                updateMonthlyChart();
+                updateRancherPayments();
+                renderAccounting(allAccounting);
+                populateMonthFilter();
+            } catch (error) {
+                console.error('Error loading accounting data:', error);
+                document.getElementById('accountingTableBody').innerHTML = `
+                    <tr><td colspan="10" class="error">Error loading accounting data. Please try again.</td></tr>
+                `;
+            }
+        }
+
+        // Update financial summary
+        function updateFinancialSummary() {
+            const totalRevenue = allAccounting.reduce((sum, row) => sum + row.revenue, 0);
+            const totalCOGS = allAccounting.reduce((sum, row) => sum + row.totalCOGS, 0);
+            const grossMargin = totalRevenue - totalCOGS;
+            const avgMargin = allAccounting.length > 0
+                ? (grossMargin / totalRevenue * 100).toFixed(1)
+                : 0;
+
+            document.getElementById('totalRevenue').textContent = `$${totalRevenue.toLocaleString()}`;
+            document.getElementById('totalCOGS').textContent = `$${totalCOGS.toLocaleString()}`;
+            document.getElementById('grossMargin').textContent = `$${grossMargin.toLocaleString()}`;
+            document.getElementById('avgMarginPercent').textContent = `${avgMargin}%`;
+        }
+
+        // Update product breakdown
+        function updateProductBreakdown() {
+            const breakdown = {
+                'Whole': { count: 0, revenue: 0 },
+                'Half': { count: 0, revenue: 0 },
+                'Quarter': { count: 0, revenue: 0 }
+            };
+
+            allAccounting.forEach(row => {
+                if (breakdown[row.productType]) {
+                    breakdown[row.productType].count++;
+                    breakdown[row.productType].revenue += row.revenue;
+                }
+            });
+
+            document.getElementById('wholeCount').textContent = breakdown['Whole'].count;
+            document.getElementById('wholeRevenue').textContent = `$${breakdown['Whole'].revenue.toLocaleString()}`;
+
+            document.getElementById('halfCount').textContent = breakdown['Half'].count;
+            document.getElementById('halfRevenue').textContent = `$${breakdown['Half'].revenue.toLocaleString()}`;
+
+            document.getElementById('quarterCount').textContent = breakdown['Quarter'].count;
+            document.getElementById('quarterRevenue').textContent = `$${breakdown['Quarter'].revenue.toLocaleString()}`;
+        }
+
+        // Update monthly chart
+        function updateMonthlyChart() {
+            const monthlyData = {};
+
+            allAccounting.forEach(row => {
+                if (!monthlyData[row.month]) {
+                    monthlyData[row.month] = 0;
+                }
+                monthlyData[row.month] += row.revenue;
+            });
+
+            const chartContainer = document.getElementById('monthlyChart');
+            const months = Object.keys(monthlyData).sort();
+
+            if (months.length === 0) {
+                chartContainer.innerHTML = '<p class="no-data">No data available</p>';
+                return;
+            }
+
+            const maxRevenue = Math.max(...Object.values(monthlyData));
+
+            chartContainer.innerHTML = months.map(month => {
+                const revenue = monthlyData[month];
+                const percentage = (revenue / maxRevenue) * 100;
+
+                return `
+                    <div class="chart-bar">
+                        <div class="chart-label">${month}</div>
+                        <div class="chart-bar-container">
+                            <div class="chart-bar-fill" style="width: ${percentage}%"></div>
+                        </div>
+                        <div class="chart-value">$${revenue.toLocaleString()}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update rancher payments
+        function updateRancherPayments() {
+            const pending = allAccounting.filter(row => row.rancherPaid === 'No');
+            const paid = allAccounting.filter(row => row.rancherPaid === 'Yes');
+
+            const pendingAmount = pending.reduce((sum, row) => sum + row.rancherCost, 0);
+            const paidAmount = paid.reduce((sum, row) => sum + row.rancherCost, 0);
+
+            document.getElementById('pendingPayments').textContent = pending.length;
+            document.getElementById('pendingAmount').textContent = `$${pendingAmount.toLocaleString()}`;
+
+            document.getElementById('paidPayments').textContent = paid.length;
+            document.getElementById('paidAmount').textContent = `$${paidAmount.toLocaleString()}`;
+        }
+
+        // Populate month filter
+        function populateMonthFilter() {
+            const months = [...new Set(allAccounting.map(row => row.month))].sort();
+            const monthFilter = document.getElementById('monthFilter');
+
+            months.forEach(month => {
+                const option = document.createElement('option');
+                option.value = month;
+                option.textContent = month;
+                monthFilter.appendChild(option);
+            });
+        }
+
+        // Render accounting table
+        function renderAccounting(data) {
+            const tbody = document.getElementById('accountingTableBody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" class="no-data">No accounting data found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(row => `
+                <tr>
+                    <td><strong>${row.orderId}</strong></td>
+                    <td>${row.orderDate}</td>
+                    <td>${row.productType}</td>
+                    <td class="currency">$${row.revenue.toLocaleString()}</td>
+                    <td class="currency">$${row.totalCOGS.toLocaleString()}</td>
+                    <td class="currency success">$${row.grossMargin.toLocaleString()}</td>
+                    <td>${row.marginPercent}%</td>
+                    <td class="currency">$${row.stripeFee.toFixed(2)}</td>
+                    <td class="currency success"><strong>$${row.netProfit.toFixed(2)}</strong></td>
+                    <td><strong>${row.netMarginPercent}%</strong></td>
+                </tr>
+            `).join('');
+        }
+
+        // Filters
+        document.getElementById('monthFilter').addEventListener('change', applyFilters);
+        document.getElementById('productFilter').addEventListener('change', applyFilters);
+
+        function applyFilters() {
+            const monthFilter = document.getElementById('monthFilter').value;
+            const productFilter = document.getElementById('productFilter').value;
+
+            let filtered = allAccounting;
+
+            if (monthFilter !== 'all') {
+                filtered = filtered.filter(row => row.month === monthFilter);
+            }
+
+            if (productFilter !== 'all') {
+                filtered = filtered.filter(row => row.productType === productFilter);
+            }
+
+            renderAccounting(filtered);
+        }
+
+        // Export CSV
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            const csvContent = [
+                ['Order ID', 'Date', 'Product', 'Revenue', 'COGS', 'Gross Margin', 'Margin %', 'Stripe Fee', 'Net Profit', 'Net Margin %'],
+                ...allAccounting.map(row => [
+                    row.orderId,
+                    row.orderDate,
+                    row.productType,
+                    row.revenue,
+                    row.totalCOGS,
+                    row.grossMargin,
+                    row.marginPercent,
+                    row.stripeFee,
+                    row.netProfit,
+                    row.netMarginPercent
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `herdshare-accounting-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        });
+
+        // Event listeners
+        document.getElementById('refreshBtn').addEventListener('click', loadAccounting);
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            sessionStorage.removeItem('herdshare_auth');
+            window.location.href = 'admin-login.html';
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            currentUser = checkAuth();
+            if (currentUser) {
+                document.getElementById('userDisplay').textContent = `Logged in as: ${currentUser.username}`;
+                loadAccounting();
+            }
+        });
+    </script>
+</body>
+</html>

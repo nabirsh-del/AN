@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerdShare Admin Login</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <h1>🐄 HerdShare</h1>
+                <p>Admin Portal</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                        autocomplete="username"
+                        placeholder="Enter username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        autocomplete="current-password"
+                        placeholder="Enter password"
+                    >
+                </div>
+
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+
+            <div class="login-footer">
+                <p>For authorized personnel only</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple authentication (in production, use proper auth service)
+        const ADMIN_CREDENTIALS = {
+            'admin': 'herdshare2026',  // Change this!
+            'rancher': 'ranch2026',     // Read-only access
+            'finance': 'finance2026'    // Accounting access only
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+
+            // Validate credentials
+            if (ADMIN_CREDENTIALS[username] && ADMIN_CREDENTIALS[username] === password) {
+                // Store session
+                sessionStorage.setItem('herdshare_auth', JSON.stringify({
+                    username: username,
+                    role: username,
+                    timestamp: Date.now()
+                }));
+
+                // Redirect based on role
+                if (username === 'finance') {
+                    window.location.href = 'admin-accounting.html';
+                } else {
+                    window.location.href = 'admin-orders.html';
+                }
+            } else {
+                errorDiv.textContent = 'Invalid username or password';
+                errorDiv.style.display = 'block';
+
+                // Clear form
+                document.getElementById('password').value = '';
+            }
+        });
+
+        // Check if already logged in
+        window.addEventListener('load', function() {
+            const auth = sessionStorage.getItem('herdshare_auth');
+            if (auth) {
+                const authData = JSON.parse(auth);
+                // Session expires after 8 hours
+                if (Date.now() - authData.timestamp < 8 * 60 * 60 * 1000) {
+                    if (authData.role === 'finance') {
+                        window.location.href = 'admin-accounting.html';
+                    } else {
+                        window.location.href = 'admin-orders.html';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
