@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - HerdShare Admin</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>🐄 HerdShare</h2>
+                <p id="userDisplay"></p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="active">
+                    <a href="admin-orders.html">
+                        <span class="icon">📦</span>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-accounting.html">
+                        <span class="icon">💰</span>
+                        <span>Accounting</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Orders</h1>
+                    <p>Real-time order tracking and fulfillment</p>
+                </div>
+                <button id="refreshBtn" class="btn-primary">
+                    <span class="icon">🔄</span> Refresh
+                </button>
+            </header>
+
+            <!-- Stats Summary -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Orders</div>
+                    <div class="stat-value" id="totalOrders">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Pending</div>
+                    <div class="stat-value" id="pendingOrders">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Processing</div>
+                    <div class="stat-value" id="processingOrders">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Shipped</div>
+                    <div class="stat-value" id="shippedOrders">0</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <select id="statusFilter" class="filter-select">
+                    <option value="all">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+                <select id="productFilter" class="filter-select">
+                    <option value="all">All Products</option>
+                    <option value="Whole">Whole</option>
+                    <option value="Half">Half</option>
+                    <option value="Quarter">Quarter</option>
+                </select>
+
+                <input type="text" id="searchInput" class="search-input" placeholder="Search orders...">
+            </div>
+
+            <!-- Orders Table -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Buyer</th>
+                            <th>Product</th>
+                            <th>Weight</th>
+                            <th>Price</th>
+                            <th>Delivery</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <tr>
+                            <td colspan="9" class="loading">Loading orders...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div id="orderModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Order Details</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="orderModalBody">
+                <!-- Order details populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API endpoint (update this to your worker URL)
+        const API_URL = 'https://your-worker.workers.dev';
+
+        let allOrders = [];
+        let currentUser = null;
+
+        // Authentication check
+        function checkAuth() {
+            const auth = sessionStorage.getItem('herdshare_auth');
+            if (!auth) {
+                window.location.href = 'admin-login.html';
+                return null;
+            }
+
+            const authData = JSON.parse(auth);
+            // Session expires after 8 hours
+            if (Date.now() - authData.timestamp > 8 * 60 * 60 * 1000) {
+                sessionStorage.removeItem('herdshare_auth');
+                window.location.href = 'admin-login.html';
+                return null;
+            }
+
+            return authData;
+        }
+
+        // Load orders
+        async function loadOrders() {
+            try {
+                const response = await fetch(`${API_URL}/api/orders`);
+                const data = await response.json();
+
+                allOrders = data.orders.map(row => ({
+                    orderId: row[0],
+                    stripePaymentId: row[1],
+                    timestamp: row[2],
+                    status: row[3],
+                    buyerName: row[4],
+                    organizationType: row[5],
+                    email: row[6],
+                    phone: row[7],
+                    deliveryAddress: row[8],
+                    productType: row[9],
+                    estimatedWeight: row[10],
+                    pricePaid: row[11],
+                    costBasis: row[12],
+                    margin: row[13],
+                    marginPercent: row[14],
+                    deliveryWindow: row[15],
+                    assignedRancher: row[16],
+                    processingFacility: row[17],
+                    scheduledProcessing: row[18],
+                    scheduledShip: row[19],
+                    trackingNumber: row[20],
+                    notes: row[21],
+                    lastUpdated: row[22]
+                }));
+
+                updateStats();
+                renderOrders(allOrders);
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('ordersTableBody').innerHTML = `
+                    <tr><td colspan="9" class="error">Error loading orders. Please try again.</td></tr>
+                `;
+            }
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('totalOrders').textContent = allOrders.length;
+            document.getElementById('pendingOrders').textContent =
+                allOrders.filter(o => o.status === 'Pending').length;
+            document.getElementById('processingOrders').textContent =
+                allOrders.filter(o => o.status === 'Processing').length;
+            document.getElementById('shippedOrders').textContent =
+                allOrders.filter(o => o.status === 'Shipped').length;
+        }
+
+        // Render orders table
+        function renderOrders(orders) {
+            const tbody = document.getElementById('ordersTableBody');
+
+            if (orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="no-data">No orders found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = orders.map(order => `
+                <tr class="order-row" data-order-id="${order.orderId}">
+                    <td><strong>${order.orderId}</strong></td>
+                    <td>${formatDate(order.timestamp)}</td>
+                    <td><span class="status-badge status-${order.status.toLowerCase()}">${order.status}</span></td>
+                    <td>${order.buyerName}</td>
+                    <td>${order.productType}</td>
+                    <td>${order.estimatedWeight} lbs</td>
+                    <td>$${parseFloat(order.pricePaid).toLocaleString()}</td>
+                    <td>${order.deliveryWindow || 'TBD'}</td>
+                    <td>
+                        <button class="btn-small" onclick="viewOrder('${order.orderId}')">View</button>
+                        ${currentUser.role === 'admin' ? `<button class="btn-small" onclick="updateStatus('${order.orderId}')">Update</button>` : ''}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        // View order details
+        function viewOrder(orderId) {
+            const order = allOrders.find(o => o.orderId === orderId);
+            if (!order) return;
+
+            const modalBody = document.getElementById('orderModalBody');
+            modalBody.innerHTML = `
+                <div class="order-details">
+                    <div class="detail-section">
+                        <h3>Order Information</h3>
+                        <div class="detail-grid">
+                            <div><strong>Order ID:</strong> ${order.orderId}</div>
+                            <div><strong>Status:</strong> <span class="status-badge status-${order.status.toLowerCase()}">${order.status}</span></div>
+                            <div><strong>Date:</strong> ${formatDate(order.timestamp)}</div>
+                            <div><strong>Product:</strong> ${order.productType} (${order.estimatedWeight} lbs)</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Buyer Information</h3>
+                        <div class="detail-grid">
+                            <div><strong>Name:</strong> ${order.buyerName}</div>
+                            <div><strong>Type:</strong> ${order.organizationType}</div>
+                            <div><strong>Email:</strong> ${order.email}</div>
+                            <div><strong>Phone:</strong> ${order.phone}</div>
+                            <div><strong>Delivery Address:</strong> ${order.deliveryAddress}</div>
+                            <div><strong>Delivery Window:</strong> ${order.deliveryWindow || 'Not specified'}</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Fulfillment</h3>
+                        <div class="detail-grid">
+                            <div><strong>Assigned Rancher:</strong> ${order.assignedRancher || 'Not assigned'}</div>
+                            <div><strong>Processing Facility:</strong> ${order.processingFacility || 'Not scheduled'}</div>
+                            <div><strong>Processing Date:</strong> ${order.scheduledProcessing || 'Not scheduled'}</div>
+                            <div><strong>Ship Date:</strong> ${order.scheduledShip || 'Not scheduled'}</div>
+                            <div><strong>Tracking:</strong> ${order.trackingNumber || 'Not available'}</div>
+                        </div>
+                    </div>
+
+                    ${currentUser.role === 'admin' ? `
+                    <div class="detail-section">
+                        <h3>Financials</h3>
+                        <div class="detail-grid">
+                            <div><strong>Price Paid:</strong> $${parseFloat(order.pricePaid).toLocaleString()}</div>
+                            <div><strong>Cost Basis:</strong> $${parseFloat(order.costBasis).toLocaleString()}</div>
+                            <div><strong>Margin:</strong> $${parseFloat(order.margin).toLocaleString()} (${order.marginPercent}%)</div>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    ${order.notes ? `
+                    <div class="detail-section">
+                        <h3>Notes</h3>
+                        <p>${order.notes}</p>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        // Update order status (admin only)
+        async function updateStatus(orderId) {
+            const newStatus = prompt('Enter new status (Pending, Processing, Shipped, Completed):');
+            if (!newStatus) return;
+
+            const validStatuses = ['Pending', 'Processing', 'Shipped', 'Completed'];
+            if (!validStatuses.includes(newStatus)) {
+                alert('Invalid status');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/orders/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId, status: newStatus })
+                });
+
+                if (response.ok) {
+                    alert('Status updated successfully');
+                    loadOrders();
+                } else {
+                    alert('Error updating status');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error updating status');
+            }
+        }
+
+        // Filters
+        document.getElementById('statusFilter').addEventListener('change', applyFilters);
+        document.getElementById('productFilter').addEventListener('change', applyFilters);
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const productFilter = document.getElementById('productFilter').value;
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = allOrders;
+
+            if (statusFilter !== 'all') {
+                filtered = filtered.filter(o => o.status === statusFilter);
+            }
+
+            if (productFilter !== 'all') {
+                filtered = filtered.filter(o => o.productType === productFilter);
+            }
+
+            if (searchText) {
+                filtered = filtered.filter(o =>
+                    o.orderId.toLowerCase().includes(searchText) ||
+                    o.buyerName.toLowerCase().includes(searchText) ||
+                    o.email.toLowerCase().includes(searchText)
+                );
+            }
+
+            renderOrders(filtered);
+        }
+
+        // Event listeners
+        document.getElementById('refreshBtn').addEventListener('click', loadOrders);
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            sessionStorage.removeItem('herdshare_auth');
+            window.location.href = 'admin-login.html';
+        });
+
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            document.getElementById('orderModal').style.display = 'none';
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            currentUser = checkAuth();
+            if (currentUser) {
+                document.getElementById('userDisplay').textContent = `Logged in as: ${currentUser.username}`;
+                loadOrders();
+            }
+        });
+    </script>
+</body>
+</html>

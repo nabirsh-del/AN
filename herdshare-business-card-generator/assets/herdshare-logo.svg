@@ -1,0 +1,18 @@
+<svg width="400" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- HerdShare Logo Placeholder -->
+  <!-- Replace this file with your actual logo -->
+
+  <!-- Cow Icon -->
+  <circle cx="50" cy="60" r="35" fill="#2c5f2d"/>
+  <text x="50" y="75" font-size="40" text-anchor="middle" fill="white">🐄</text>
+
+  <!-- HerdShare Text -->
+  <text x="100" y="70" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#2c5f2d">
+    HerdShare
+  </text>
+
+  <!-- Tagline -->
+  <text x="100" y="95" font-family="Arial, sans-serif" font-size="14" fill="#666666">
+    American Beef. American Values.
+  </text>
+</svg>

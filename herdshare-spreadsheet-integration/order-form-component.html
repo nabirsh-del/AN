@@ -1,0 +1,349 @@
+<!-- HerdShare Order Form Component -->
+<!-- Copy this entire section into your HerdShare website where you want the order form -->
+
+<section id="order-section" class="order-section">
+    <div class="container">
+        <h2>Place Your Order</h2>
+        <p class="section-subtitle">Direct from independent American ranches to your door</p>
+
+        <form id="herdshare-order-form" class="order-form">
+            <!-- Product Selection -->
+            <div class="form-section">
+                <h3>1. Select Product</h3>
+                <div class="product-options">
+                    <label class="product-card">
+                        <input type="radio" name="productType" value="Whole" required>
+                        <div class="product-content">
+                            <h4>🐄 Whole Cow</h4>
+                            <p class="product-weight">~475 lbs retail cuts</p>
+                            <p class="product-price">$4,750</p>
+                            <p class="product-detail">$10/lb • Best value</p>
+                        </div>
+                    </label>
+
+                    <label class="product-card">
+                        <input type="radio" name="productType" value="Half" required>
+                        <div class="product-content">
+                            <h4>🥩 Half Cow</h4>
+                            <p class="product-weight">~237 lbs retail cuts</p>
+                            <p class="product-price">$2,370</p>
+                            <p class="product-detail">$10/lb • Most popular</p>
+                        </div>
+                    </label>
+
+                    <label class="product-card">
+                        <input type="radio" name="productType" value="Quarter" required>
+                        <div class="product-content">
+                            <h4>🍖 Quarter Cow</h4>
+                            <p class="product-weight">~118 lbs retail cuts</p>
+                            <p class="product-price">$1,180</p>
+                            <p class="product-detail">$10/lb • Great starter</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Buyer Information -->
+            <div class="form-section">
+                <h3>2. Your Information</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="buyerName">Organization / House Name *</label>
+                        <input
+                            type="text"
+                            id="buyerName"
+                            name="buyerName"
+                            placeholder="e.g., Alpha Beta Chapter"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organizationType">Organization Type</label>
+                        <select id="organizationType" name="organizationType">
+                            <option value="Fraternity">Fraternity</option>
+                            <option value="Sorority">Sorority</option>
+                            <option value="Community House">Community House</option>
+                            <option value="Institution">Institution</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Contact Email *</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="contact@organization.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Contact Phone</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="(555) 123-4567"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery Information -->
+            <div class="form-section">
+                <h3>3. Delivery Details</h3>
+                <div class="form-group">
+                    <label for="deliveryAddress">Delivery Address *</label>
+                    <textarea
+                        id="deliveryAddress"
+                        name="deliveryAddress"
+                        rows="3"
+                        placeholder="Street address, City, State, ZIP"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="deliveryWindow">Preferred Delivery Window (optional)</label>
+                    <input
+                        type="text"
+                        id="deliveryWindow"
+                        name="deliveryWindow"
+                        placeholder="e.g., Feb 1-5, 2026"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Special Instructions or Notes (optional)</label>
+                    <textarea
+                        id="notes"
+                        name="notes"
+                        rows="3"
+                        placeholder="Any special requests, freezer access notes, etc."
+                    ></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="btn-order">
+                    Proceed to Secure Checkout
+                </button>
+                <p class="secure-note">🔒 Secure payment via Stripe • No credit card fee markup</p>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Add Stripe.js before your website-integration.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Add the integration JavaScript -->
+<script src="website-integration.js"></script>
+
+<style>
+/* Order Form Styles - Add to your existing stylesheet */
+
+.order-section {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.order-section .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.order-section h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #2c5f2d;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+}
+
+.order-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-section {
+    margin-bottom: 40px;
+}
+
+.form-section h3 {
+    font-size: 1.5em;
+    color: #2c5f2d;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Product Selection */
+.product-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.product-card:hover {
+    border-color: #2c5f2d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 95, 45, 0.1);
+}
+
+.product-card input[type="radio"] {
+    display: none;
+}
+
+.product-card input[type="radio"]:checked + .product-content {
+    color: #2c5f2d;
+}
+
+.product-card input[type="radio"]:checked ~ .product-content h4 {
+    color: #2c5f2d;
+}
+
+.product-card input[type="radio"]:checked {
+    & + .product-content {
+        border-color: #2c5f2d;
+    }
+}
+
+.product-card:has(input[type="radio"]:checked) {
+    border-color: #2c5f2d;
+    background: #f0f7f0;
+}
+
+.product-content {
+    text-align: center;
+}
+
+.product-content h4 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.product-weight {
+    color: #666;
+    font-size: 0.95em;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 2em;
+    font-weight: 700;
+    color: #2c5f2d;
+    margin: 15px 0;
+}
+
+.product-detail {
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Form Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2c5f2d;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Form Actions */
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-order {
+    background: #2c5f2d;
+    color: white;
+    padding: 18px 50px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-order:hover {
+    background: #1a3d1b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(44, 95, 45, 0.3);
+}
+
+.secure-note {
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .order-form {
+        padding: 25px;
+    }
+
+    .product-options {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>

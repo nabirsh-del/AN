@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Card with bleed: 3.75" x 2.25" at 300 DPI = 1125px x 675px */
+        @page {
+            size: 3.75in 2.25in;
+            margin: 0;
+        }
+
+        body {
+            width: 1125px;
+            height: 675px;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: white;
+            position: relative;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Bleed guide (for reference, won't print) */
+        .bleed-guide {
+            position: absolute;
+            border: 2px dashed #ff0000;
+            opacity: 0; /* Hidden in final output */
+        }
+
+        .bleed-outer {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .bleed-inner {
+            /* Safe zone: 0.125" (37.5px at 300dpi) inside trim */
+            top: 75px;
+            left: 75px;
+            right: 75px;
+            bottom: 75px;
+        }
+
+        /* Logo container */
+        .logo-container {
+            text-align: center;
+            padding: 0 150px; /* Safe margins */
+        }
+
+        .logo-container img {
+            max-width: 750px; /* ~2.5 inches at 300 DPI */
+            max-height: 450px; /* ~1.5 inches at 300 DPI */
+            width: auto;
+            height: auto;
+        }
+
+        /* Variant A: Clean white background */
+        .variant-a {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="card variant-a">
+        <!-- Bleed guides -->
+        <div class="bleed-guide bleed-outer"></div>
+        <div class="bleed-guide bleed-inner"></div>
+
+        <!-- Logo -->
+        <div class="logo-container">
+            <img src="../assets/herdshare-logo.svg" alt="HerdShare">
+        </div>
+    </div>
+</body>
+</html>
