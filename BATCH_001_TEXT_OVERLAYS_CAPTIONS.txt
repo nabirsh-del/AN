@@ -1,0 +1,70 @@
+HERDSHARE × POMELE — BATCH 001
+TEXT OVERLAYS & CAPTIONS FOR DESIGN PHASE
+==========================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 01: FROM AMERICAN SOIL
+
+TEXT OVERLAY:
+FROM AMERICAN SOIL
+
+CAPTION:
+This supply chain starts at the source. Independent ranchers managing American land, raising cattle without corporate oversight. Food infrastructure begins with who owns the ground.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 02: OWN THE SUPPLY
+
+TEXT OVERLAY:
+OWN THE SUPPLY
+
+CAPTION:
+Direct distribution means controlling every step between ranch and delivery. No intermediaries extracting margin, no black boxes in the supply chain. This is what infrastructure looks like when ranchers own it.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 03: KEEPS DOLLARS LOCAL
+
+TEXT OVERLAY:
+KEEPS DOLLARS LOCAL
+
+CAPTION:
+When supply chains run through rural communities instead of around them, the economic impact stays regional. Independent infrastructure means independent economies.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 04: CLEAN AMERICAN PROTEIN
+
+TEXT OVERLAY:
+CLEAN AMERICAN PROTEIN
+
+CAPTION:
+Beef raised on American ranches, processed through transparent supply chains, delivered at the scale institutions require. Protein infrastructure without the corporate distribution tax.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 05: WHO CONTROLS OUR FOOD
+
+TEXT OVERLAY:
+WHO CONTROLS OUR FOOD
+
+CAPTION:
+The supply chain is not neutral territory. Every distribution choice is a power choice. HerdShare exists because ranchers decided they didn't need permission to build their own infrastructure.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DESIGN SPECIFICATIONS FOR TEXT OVERLAYS:
+
+Typography:
+- Typeface: Modern sans-serif (Helvetica, Gotham, Inter, or DM Sans)
+- Color: White or off-white (#F5F5F5 to #FFFFFF)
+- Case: UPPERCASE
+- Placement: Centered or top-third of image
+- Size: Large enough to be readable on mobile (test at 1080x1350px)
+
+Layout:
+- Ensure text has sufficient contrast against background
+- Add subtle drop shadow or background overlay if needed for readability
+- Leave space at bottom for potential logo placement
+- Test legibility on both Instagram and LinkedIn mobile feeds
