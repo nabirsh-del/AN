@@ -1,0 +1,50 @@
+HERDSHARE × POMELE — BATCH 001
+ALL PROMPTS FOR 4:5 PORTRAIT FORMAT
+=====================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 01: FROM AMERICAN SOIL (Origin Pillar)
+
+A cinematic wide-angle shot of an independent cattle ranch at golden hour, with rolling pasture extending into soft focus in the background. In the foreground, weathered fence posts made of dark wood create strong leading lines from bottom-left to top-right. Several Black Angus cattle graze naturally in the middle distance, their forms backlit by warm sunset light creating rim lighting around their bodies. The grass is natural and slightly overgrown, not manicured—real working land. Shallow depth of field keeps the cattle slightly soft while the nearest fence post is sharp. Color palette: warm golden yellows, deep greens turning amber, rich browns. Sky shows natural gradient from pale gold to soft blue. Shot on a full-frame camera with an 85mm lens at f/2.8. Documentary photography style—no people visible, no buildings in frame, no staged elements. The scene should feel like a still from a Ken Burns documentary about American agriculture. Exclude: any logos, text, people, vehicles, modern structures, artificial lighting, HDR effects, or oversaturation.
+
+TEXT OVERLAY: FROM AMERICAN SOIL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 02: OWN THE SUPPLY (Control Pillar)
+
+Interior shot of a professional cold storage warehouse facility, captured from a low angle looking down a long corridor between towering storage racks of palletized beef boxes. The space is massive and utilitarian—no decoration, pure function. Lighting comes from industrial overhead fixtures creating pools of cool white light that fade into shadow at the ceiling. The floor is polished concrete with slight moisture and condensation visible, reflecting the lights above. In the middle distance, a stainless steel pallet jack sits at rest, wheels locked. The boxes are uniform, wrapped in white shrink wrap with no visible branding. Temperature control systems and metal ductwork visible in upper frame. Shot with a 24mm lens at f/5.6 to keep both foreground and middle distance sharp. Color temperature: cool blues and grays, stainless steel, concrete, ice-white. The mood is serious, industrial, and competent—this is infrastructure at scale. Camera angle suggests human perspective walking through the facility. Exclude: workers, faces, company logos, colorful packaging, decorative elements, warm lighting, or any "friendly" staging. This should feel like the opening shot of a logistics documentary.
+
+TEXT OVERLAY: OWN THE SUPPLY
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 03: KEEPS DOLLARS LOCAL (Impact Pillar)
+
+A medium-wide shot of a rural American grain elevator complex at dusk, photographed from ground level with a 50mm lens at f/4. The tall cylindrical silos dominate the right side of the frame, their weathered white paint and metal ladders catching the last warm light of day. In the foreground left, a gravel parking area with a single work truck (no branding visible) sits idle. Beyond the grain elevator, a small water tower is visible against a soft blue-gray sky with high cirrus clouds. The entire scene is bathed in the transitional light of blue hour—still enough ambient light to see detail but the industrial structures are beginning to stand out against the darkening sky. This is working rural America: functional, unglamorous, essential. Texture details visible on the concrete foundations, rust stains on the silo panels, dust on the truck. Shot with natural light only. The composition should feel like a Walker Evans photograph—documentary, honest, respectful of the infrastructure that makes rural economies function. Exclude: people, modern suburban elements, chain businesses, bright colors, staged props, or anything that suggests tourism rather than work.
+
+TEXT OVERLAY: KEEPS DOLLARS LOCAL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 04: CLEAN AMERICAN PROTEIN (Quality Pillar)
+
+Extreme close-up shot of a dry-aged beef ribeye steak resting on a stainless steel prep surface in a commercial kitchen environment. Shot with a macro lens (100mm) at f/2.8 to create shallow depth of field—the front edge of the steak is tack-sharp while the background fades into soft bokeh. The meat shows natural marbling with white fat interspersed through deep red muscle, and the exterior has the dark, concentrated crust characteristic of proper dry-aging. Surface moisture catches subtle overhead lighting creating small specular highlights on the meat. Behind the steak, out of focus but recognizable, are other cuts on the same steel surface and the blurred edge of a commercial cutting board. The steel surface shows very slight scratches and wear—this is a working kitchen, not a showroom. Lighting is cool-toned from overhead commercial kitchen fixtures, creating slight shadows that give the meat dimension. Color palette: deep crimson and burgundy meat tones, bright white fat, brushed stainless steel, cool gray-blue background. The shot should feel clinical but not sterile—this is food as serious fuel, not food as entertainment. Exclude: hands, plates, garnishes, sauces, decorative elements, warm "cozy" lighting, wood surfaces, or any styling that suggests home cooking or fine dining presentation.
+
+TEXT OVERLAY: CLEAN AMERICAN PROTEIN
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AD 05: WHO CONTROLS OUR FOOD (Movement Pillar)
+
+An abstract architectural shot of a large-scale agricultural distribution center, photographed at dawn with cool blue light. The camera is positioned low, looking up at the geometric intersection of a massive corrugated metal building facade and a concrete loading dock ramp that creates strong diagonal lines across the frame. The corrugated metal panels show texture and slight weathering—this structure has been in service. Morning fog or mist softly diffuses the background, where the silhouette of additional industrial structures is barely visible. In the extreme foreground, slightly out of focus, the corner of a wooden shipping pallet creates a compositional anchor. The overall geometry is strong: horizontal lines of the building siding, diagonal of the ramp, vertical posts. Shot with a 35mm lens at f/8 to maintain sharpness throughout. Color palette is deliberately muted: slate gray, fog blue, concrete tan, weathered metal. A small American flag decal is visible on the building corner, aged and subtle—not prominent, just present. The mood is contemplative and slightly melancholic but not pessimistic—this is what real infrastructure looks like before the marketing team photographs it. Exclude: people, vehicles, bright colors, logos, signage with text, polished or new-looking materials, or any sense of staged corporate photography.
+
+TEXT OVERLAY: WHO CONTROLS OUR FOOD
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IMPORTANT SETTINGS FOR POMELE:
+- Aspect ratio: 4:5 portrait
+- Style: Photorealistic, cinematic
+- No text in generated images (text overlays added separately)
