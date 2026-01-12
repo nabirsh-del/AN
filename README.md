@@ -1,4 +1,4 @@
-# Dr. Badhwar Intelligence & Response Platform
+Intelligence & Response Platform
 
 Production-grade monitoring, intelligence, and rapid-response platform focused on cardiothoracic surgery news, research, policy, and competitive developments. Built for a small communications team to operate with minimal technical support.
 
